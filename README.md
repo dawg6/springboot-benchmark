@@ -30,7 +30,7 @@ The below are Port #s to expose on host machine if you want to query the image(s
 
 ### Building and running locally
 
-The project is built using maven. 
+The project is built using maven. You must have a version of Java 17 installed locally and JAVA_HOME set.
 
     mvnw package
 
