@@ -7,7 +7,7 @@ services:
             dockerfile: Dockerfile-openjdk
         image: ${DOCKER_USER}/openjdk-benchmark
         ports:
-            - 8081:8080
+            - ${OPENJDK_PORT}:8080
         env_file:
             - ./.env
     native:
@@ -16,7 +16,7 @@ services:
             dockerfile: Dockerfile-native
         image: ${DOCKER_USER}/native-benchmark
         ports:
-            - 8082:8080
+            - ${NATIVE_PORT}:8080
         env_file:
             - ./.env
     graalvm:
@@ -25,7 +25,7 @@ services:
             dockerfile: Dockerfile-graalvm
         image: ${DOCKER_USER}/graalvm-benchmark
         ports:
-            - 8083:8080
+            - ${GRAALVM_PORT}:8080
         env_file:
             - ./.env
     benchmark:
