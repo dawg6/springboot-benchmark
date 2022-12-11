@@ -1,0 +1,45 @@
+version: '3.1'
+
+services:
+    openjdk:
+        build:
+            context: .
+            dockerfile: Dockerfile-openjdk
+        image: ${DOCKER_USER}/openjdk-benchmark
+        ports:
+            - 8081:8080
+        env_file:
+            - ./.env
+    native:
+        build:
+            context: .
+            dockerfile: Dockerfile-native
+        image: ${DOCKER_USER}/native-benchmark
+        ports:
+            - 8082:8080
+        env_file:
+            - ./.env
+    graalvm:
+        build:
+            context: .
+            dockerfile: Dockerfile-graalvm
+        image: ${DOCKER_USER}/graalvm-benchmark
+        ports:
+            - 8083:8080
+        env_file:
+            - ./.env
+    benchmark:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: ${DOCKER_USER}/benchmark
+        volumes:
+            - ./results:/results
+        depends_on:
+            - openjdk
+            - native
+            - graalvm
+        env_file:
+            - ./.env
+
+

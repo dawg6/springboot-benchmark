@@ -1,0 +1,6 @@
+target/
+.env
+docker-*
+Dockerfile*
+mvnw.cmd
+results/

@@ -1,0 +1,27 @@
+FROM ghcr.io/graalvm/graalvm-ce:ol9-java17 AS build
+
+RUN gu install native-image
+
+WORKDIR /build
+
+COPY ./mvnw .
+COPY ./pom.xml .
+COPY .mvn/ .mvn/
+
+RUN sed -i 's/\r$//' mvnw
+RUN sh ./mvnw verify --fail-never
+
+COPY ./src src/
+
+RUN sh ./mvnw package
+RUN sh ./mvnw -Pnative native:compile
+
+FROM ghcr.io/graalvm/native-image:ol9-java17 AS final
+
+WORKDIR /root
+
+COPY --from=build /build/target/springboot-benchmark .
+
+EXPOSE 8080
+
+ENTRYPOINT ["/root/springboot-benchmark"]
