@@ -1,4 +1,4 @@
-package com.example.vanilla.services;
+package com.dawg6.benchmark.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.vanilla.data.BenchmarkBean;
-import com.example.vanilla.data.BenchmarkResult;
+import com.dawg6.benchmark.data.BenchmarkBean;
+import com.dawg6.benchmark.data.BenchmarkResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController

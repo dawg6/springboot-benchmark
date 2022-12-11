@@ -1,4 +1,4 @@
-package com.example.vanilla.components;
+package com.dawg6.benchmark.components;
 
 import java.util.Random;
 import java.util.UUID;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.example.vanilla.data.BenchmarkBean;
+import com.dawg6.benchmark.data.BenchmarkBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component

@@ -32,11 +32,11 @@ The below are Port #s to expose on host machine if you want to query the image(s
 
 The project is built using maven. 
 
-    ./mvnw package
+    mvnw package
 
 To run:
 
-    ./mvnw springboot:run
+    mvnw springboot:run
 
 The application will listen on port 8080
 
@@ -55,6 +55,8 @@ The project is built and run using docker compose on windows or docker-compose o
 
     docker compose build
 
+The scripts build_all.bat and build_all.sh have been provided as a convenience.
+
 If you don't want to build, and just want to run, you can pull images:
 
     docker compose pull
@@ -64,6 +66,9 @@ To run
     docker compose up --abort-on-container-exit
 
 This will start up each image, run the benchmarks and then exit. Results will be written to the subdirectory ./results (one .txt file for each image)
+
+The script run_all.bat and run_all.sh have been provided as a convenience.
+
 
 
 ## Results Format

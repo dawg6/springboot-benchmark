@@ -3,7 +3,8 @@
 mkdir -p ./results
 rm -rf ./results/*.txt
 
-for f in openjdk graalvm native; do
+for f in openjdk graalvm native
+do
     echo "Waiting for $f to start..."
     host="http://$f:8080"
     echo "checking $host"

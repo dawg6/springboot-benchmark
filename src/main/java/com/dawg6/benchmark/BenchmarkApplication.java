@@ -1,4 +1,4 @@
-package com.example.vanilla;
+package com.dawg6.benchmark;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +10,12 @@ import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 @ServletComponentScan
-// @RegisterReflectionForBinding(classes = {
-// 	BenchmarkBean.class
-// })
-public class VanillaApplication {
+public class BenchmarkApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(VanillaApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(BenchmarkApplication.class);
 	
 	public static void main(String[] args) {
-		SpringApplication.run(VanillaApplication.class, args);
+		SpringApplication.run(BenchmarkApplication.class, args);
 		log.info("Application Started");
 	}
 

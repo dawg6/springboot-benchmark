@@ -1,4 +1,4 @@
-package com.example.vanilla.data;
+package com.dawg6.benchmark.data;
 
 public class BenchmarkBean {
     private String aString;
