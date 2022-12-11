@@ -30,7 +30,7 @@ The below are Port #s to expose on host machine if you want to query the image(s
 
 ### Building and running locally
 
-The project is built using maven. You must have a version of Java 17 installed locally and JAVA_HOME set.
+The project is built using maven. You must have a version of Java 17 JDK installed locally and JAVA_HOME set.
 
     mvnw package
 
@@ -57,7 +57,7 @@ The project is built and run using docker compose on windows or docker-compose o
 
 The scripts build_all.bat and build_all.sh have been provided as a convenience.
 
-If you don't want to build, and just want to run, you can pull images:
+If you don't want to build, and just want to run, you can pull images from the DOCKER_USER repo.
 
     docker compose pull
 
@@ -82,3 +82,6 @@ The results are written as a Json file:
         iterationsPerMs: # of iterations per millisecond
     }
 
+# My Results
+
+My results are in the sub-folder latest-results

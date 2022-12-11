@@ -4,3 +4,4 @@ docker-*
 Dockerfile*
 mvnw.cmd
 results/
+latest-results/
