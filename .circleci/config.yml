@@ -1,0 +1,44 @@
+version: 2
+
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - build:
+          context:
+            - dawg6-main
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Setup Env
+          command: |
+            echo 'export TAG=graalvm-0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
+      - run:
+          name: Build and push Docker image
+          command: |
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            echo 'DOCKER_USER=dawg6' > .env
+            echo 'GRAALVM_PORT=8081' >> .env
+            echo 'OPENJDK_PORT=8082' >> .env
+            echo 'NATIVE_PORT=8083' >> .env
+            docker compose build
+            docker tag dawg6/benchmark dawg6/benchmark:$TAG
+            docker tag dawg6/graalvm-benchmark dawg6/graalvm-benchmark:$TAG
+            docker tag dawg6/native-benchmark dawg6/native-benchmark:$TAG
+            docker tag dawg6/openjdk-benchmark dawg6/openjdk-benchmark:$TAG
+            docker tag dawg6/benchmark:$TAG dawg6/benchmark:latest
+            docker tag dawg6/graalvm-benchmark:$TAG dawg6/graalvm-benchmark:latest
+            docker tag dawg6/native-benchmark:$TAG dawg6/native-benchmark:latest
+            docker tag dawg6/openjdk-benchmark:$TAG dawg6/openjdk-benchmark:latest
+            docker push dawg6/benchmark:$TAG
+            docker push dawg6/benchmark:latest
+            docker push dawg6/benchmark-graalvm:$TAG
+            docker push dawg6/benchmark-graalvm:latest
+            docker push dawg6/benchmark-native:$TAG
+            docker push dawg6/benchmark-native:latest
+            docker push dawg6/benchmark-openjdk:$TAG
+            docker push dawg6/benchmark-openjdk:latest
