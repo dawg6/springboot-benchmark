@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+    benchmark:
+        build:
+            context: .
+            dockerfile: Dockerfile-graalvm
+        image: ${DOCKER_USER}/graalvm-benchmark
+        ports:
+            - 8080:8080
+        env_file:
+            - ./.env
