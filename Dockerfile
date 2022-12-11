@@ -1,4 +1,4 @@
-FROM curlimages/curl
+FROM alpine/curl
 
 WORKDIR /
 
