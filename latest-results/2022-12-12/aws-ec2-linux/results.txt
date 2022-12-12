@@ -1,21 +1,26 @@
 Docker images:
 
 Results for graalvm
-[{"name":"toJson","elapsedMs":1110,"iterations":100000,"iterationsPerMs":90.09009009009009},{"name":"fromJson","elapsedMs":1522,"iterations":100000,"iterationsPerMs":65.7030223390276},{"name":"compute","elapsedMs":662,"iterations":100000,"iterationsPerMs":151.05740181268882},{"name":"total","elapsedMs":3294,"iterations":300000,"iterationsPerMs":91.07468123861567}]
+[{"name":"toJson","elapsedMs":1085,"iterations":100000,"iterationsPerMs":92.16589861751152},{"name":"fromJson","elapsedMs":1319,"iterations":100000,"iterationsPerMs":75.8150113722517},{"name":"compute","elapsedMs":658,"iterations":100000,"iterationsPerMs":151.9756838905775},{"name":"total","elapsedMs":3062,"iterations":300000,"iterationsPerMs":97.97517962116264}]
+Results for native-ee-pgo
+[{"name":"toJson","elapsedMs":1085,"iterations":100000,"iterationsPerMs":92.16589861751152},{"name":"fromJson","elapsedMs":1536,"iterations":100000,"iterationsPerMs":65.10416666666667},{"name":"compute","elapsedMs":642,"iterations":100000,"iterationsPerMs":155.76323987538942},{"name":"total","elapsedMs":3263,"iterations":300000,"iterationsPerMs":91.93993257738278}]
+Results for native-ee
+[{"name":"toJson","elapsedMs":1496,"iterations":100000,"iterationsPerMs":66.84491978609626},{"name":"fromJson","elapsedMs":1875,"iterations":100000,"iterationsPerMs":53.333333333333336},{"name":"compute","elapsedMs":641,"iterations":100000,"iterationsPerMs":156.00624024961},{"name":"total","elapsedMs":4012,"iterations":300000,"iterationsPerMs":74.77567298105683}]
 Results for native
-[{"name":"toJson","elapsedMs":1637,"iterations":100000,"iterationsPerMs":61.08735491753207},{"name":"fromJson","elapsedMs":2062,"iterations":100000,"iterationsPerMs":48.49660523763337},{"name":"compute","elapsedMs":657,"iterations":100000,"iterationsPerMs":152.20700152207002},{"name":"total","elapsedMs":4356,"iterations":300000,"iterationsPerMs":68.87052341597796}]
+[{"name":"toJson","elapsedMs":1880,"iterations":100000,"iterationsPerMs":53.191489361702125},{"name":"fromJson","elapsedMs":2231,"iterations":100000,"iterationsPerMs":44.82294935006723},{"name":"compute","elapsedMs":642,"iterations":100000,"iterationsPerMs":155.76323987538942},{"name":"total","elapsedMs":4753,"iterations":300000,"iterationsPerMs":63.11803071744161}]
 Results for openjdk
-[{"name":"toJson","elapsedMs":966,"iterations":100000,"iterationsPerMs":103.51966873706004},{"name":"fromJson","elapsedMs":1580,"iterations":100000,"iterationsPerMs":63.29113924050633},{"name":"compute","elapsedMs":676,"iterations":100000,"iterationsPerMs":147.92899408284023},{"name":"total","elapsedMs":3222,"iterations":300000,"iterationsPerMs":93.10986964618249}]
+[{"name":"toJson","elapsedMs":900,"iterations":100000,"iterationsPerMs":111.11111111111111},{"name":"fromJson","elapsedMs":1523,"iterations":100000,"iterationsPerMs":65.65988181221273},{"name":"compute","elapsedMs":675,"iterations":100000,"iterationsPerMs":148.14814814814815},{"name":"total","elapsedMs":3098,"iterations":300000,"iterationsPerMs":96.83666881859264}]
 
 Memory usage:
 
 docker stats --no-stream
 
-CONTAINER ID   NAME                             CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
-91a7444da73b   springboot-benchmark-openjdk-1   0.13%     123.4MiB / 7.787GiB   1.55%     660B / 0B         0B / 0B           36
-3141765fb9b9   springboot-benchmark-graalvm-1   0.15%     116.2MiB / 7.787GiB   1.46%     660B / 0B         0B / 0B           37
-26fad64362cd   springboot-benchmark-native-1    0.01%     22.24MiB / 7.787GiB   0.28%     750B / 0B         0B / 0B           18
-
+CONTAINER ID   NAME                                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+d9c8c566c058   springboot-benchmark-native-ee-pgo-1   0.01%     14.2MiB / 7.787GiB    0.18%     750B / 0B         0B / 0B           18
+a2300d75cbe0   springboot-benchmark-openjdk-1         0.12%     147.7MiB / 7.787GiB   1.85%     660B / 0B         0B / 0B           36
+7de77ae79117   springboot-benchmark-native-ee-1       0.01%     16.25MiB / 7.787GiB   0.20%     750B / 0B         0B / 0B           18
+e31383e8f92d   springboot-benchmark-native-1          0.02%     22.45MiB / 7.787GiB   0.28%     750B / 0B         0B / 0B           18
+ddc7560f4d66   springboot-benchmark-graalvm-1         0.12%     107.7MiB / 7.787GiB   1.35%     750B / 0B         0B / 0B           37
 
 Locally:
 
