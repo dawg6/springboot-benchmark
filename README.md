@@ -10,7 +10,7 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 
 Each environment has been built into an image and published on https://hub.docker.com/r/dawg6/benchmark
 
-- dawg6/benchmanativerk:openjdk-(version)
+- dawg6/benchmark:native-(version)
 - dawg6/benchmark:graalvm-(version)
 - dawg6/benchmark:openjdk-(version)
 
