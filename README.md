@@ -22,9 +22,9 @@ Also, there is a separate image to run the benchmark tests against all of the en
 
 - toJson (convert POJO object to Json)
 - fromJson (convert Json to POJO)
-- compute (perform CPU intensive operations)
+- compute (perform CPU intensive operations - each iteration is 100 x tan/atan computations)
 
-Each benchmark is run 100,000 times
+Each benchmark is run 100,000 iterations
 
 ## Getting Started
 
