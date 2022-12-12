@@ -1,3 +1,3 @@
 #!/bin/sh
 ./mvnw package
-docker-compose build
+docker-compose build  --progress=plain

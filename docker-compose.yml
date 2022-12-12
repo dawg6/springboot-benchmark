@@ -5,7 +5,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-openjdk
-        image: ${DOCKER_USER}/openjdk-benchmark
+        image: ${DOCKER_USER}/benchmark:openjdk-${IMAGE_TAG}
         ports:
             - ${OPENJDK_PORT}:8080
         env_file:
@@ -14,7 +14,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-native
-        image: ${DOCKER_USER}/native-benchmark
+        image: ${DOCKER_USER}/benchmark:native-${IMAGE_TAG}
         ports:
             - ${NATIVE_PORT}:8080
         env_file:
@@ -23,7 +23,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-graalvm
-        image: ${DOCKER_USER}/graalvm-benchmark
+        image: ${DOCKER_USER}/benchmark:graalvm-${IMAGE_TAG}
         ports:
             - ${GRAALVM_PORT}:8080
         env_file:
@@ -32,7 +32,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: ${DOCKER_USER}/benchmark
+        image: ${DOCKER_USER}/benchmark:runner-${IMAGE_TAG}
         volumes:
             - ./results:/results
         depends_on:

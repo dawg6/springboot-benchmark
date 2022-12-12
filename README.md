@@ -8,6 +8,16 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 - GraalVM (using ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2)
 - Native (using ghcr.io/graalvm/native-image:ol9-java17)
 
+Each environment has been built into an image and published on https://hub.docker.com/r/dawg6/benchmark
+
+- dawg6/benchmanativerk:openjdk-(version)
+- dawg6/benchmark:graalvm-(version)
+- dawg6/benchmark:openjdk-(version)
+
+Also, there is a separate image to run the benchmark tests against all of the environments, using docker compose"
+
+- dawg6/benchmark:runner-(version)
+
 ## Benchmarks
 
 - toJson (convert POJO object to Json)
@@ -21,11 +31,12 @@ Each benchmark is run 100,000 times
 Download the source code and create the .env file using env.example.txt as a template. The environment variables should be set to:
 
 DOCKER_USER - The user to pull from docker (use dawg6 to pull my images)
+IMAGE_TAG - The version of the below images to pull (default is latest)
 
 The below are Port #s to expose on host machine if you want to query the image(s) yourself. Each must have a unique, unused port
 
-- GRAALVM_PORT
-- NATIVE_PORT
+- GRAALVM_PORT 
+- NATIVE_PORT 
 - OPENJDK_PORT
 
 ### Building and running locally
@@ -55,7 +66,9 @@ The project is built and run using docker compose on windows or docker-compose o
 
     docker compose build
 
-The scripts build_all.bat and build_all.sh have been provided as a convenience.
+Note: Add "--progress=plain" to see raw build output.
+
+The scripts [build_all.bat](build_all.bat) and [build_all.sh](build_all.sh) have been provided as a convenience.
 
 If you don't want to build, and just want to run, you can pull images from the DOCKER_USER repo.
 
@@ -67,21 +80,22 @@ To run
 
 This will start up each image, run the benchmarks and then exit. Results will be written to the subdirectory ./results (one .txt file for each image)
 
-The script run_all.bat and run_all.sh have been provided as a convenience.
-
-
+The scriptx [run_all.bat](run_all.bat) and [run_all.sh](run_all.sh) have been provided as a convenience.
 
 ## Results Format
 
 The results are written as a Json file:
 
-    {
-        name: Name of the benchmark
-        elapsedMs: # of milliseconds to run the benchmark
-        iterations: # of iterations
-        iterationsPerMs: # of iterations per millisecond
-    }
+    [
+        {
+            name: Name of the benchmark
+            elapsedMs: # of milliseconds to run the benchmark
+            iterations: # of iterations
+            iterationsPerMs: # of iterations per millisecond
+        },
+        ...
+    ]
 
 # My Results
 
-My results are in the sub-folder latest-results
+My results are in the sub-folder [latest-results](latest-results/)
