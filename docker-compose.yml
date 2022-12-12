@@ -34,7 +34,7 @@ services:
             dockerfile: Dockerfile-native-ee-pgo
         image: ${DOCKER_USER}/benchmark:native-ee-pgo-${IMAGE_TAG}
         ports:
-            - ${NATIVE_EE_pgo_PORT}:8080
+            - ${NATIVE_EE_PGO_PORT}:8080
         env_file:
             - ./.env
     graalvm:
