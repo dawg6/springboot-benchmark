@@ -1,4 +1,4 @@
-FROM ghcr.io/graalvm/native-image:ol9-java17 AS build
+FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS build
 
 WORKDIR /build
 
@@ -14,7 +14,7 @@ COPY ./src src/
 RUN sh ./mvnw package
 RUN sh ./mvnw -Pnative native:compile
 
-FROM ghcr.io/graalvm/native-image:ol9-java17 AS final
+FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS final
 
 WORKDIR /root
 

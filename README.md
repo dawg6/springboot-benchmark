@@ -5,14 +5,17 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 ## Environments
 
 - OpenJDK (using eclipse-temurin:17-jre-ubi9-minimal)
-- GraalVM (using ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2)
-- Native (using ghcr.io/graalvm/native-image:ol9-java17)
+- GraalVM CE (using ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2)
+- GraalVM CE Native (using ghcr.io/graalvm/native-image:ol9-java17)
+- GraalVM EE Natve (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22)
+- GraalVM EE Natve PGO (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 and Profile Guided Optimizations)
 
 Each environment has been built into an image and published on https://hub.docker.com/r/dawg6/benchmark
 
-- dawg6/benchmark:native-(version)
-- dawg6/benchmark:graalvm-(version)
-- dawg6/benchmark:openjdk-(version)
+- OpenJDK: dawg6/benchmark:openjdk-(version)
+- GraalVM CE: dawg6/benchmark:graalvm-(version)
+- GraalVM CE Native: dawg6/benchmark:native-(version)
+- Note: Oracle GraalVM EE license prevents me from publishing the GraalVM EE images to hub.docker.com.
 
 Also, there is a separate image to run the benchmark tests against all of the environments, using docker compose"
 
@@ -59,8 +62,11 @@ The following endpoints are supported:
 - /benchmarkToJson - To Json Benchmark
 - /benchmarkFromJson - From Json Benchmark
 - /benchmarkCompute - Compute Benchmark
+- /shutdown - Shutsdown the app. This is mainly used for profiling for the native-ee-pgo image
 
 ### Building using docker compose (or docker-compose)
+
+**Note: In order to run the GraalVM Enterprise Edition tests, you will need to download and build using the GraalVM EE images. Instructions for doing this are in the file [README-GraalVM-EE.md](README-GraalVM-EE.md).**
 
 The project is built and run using docker compose on windows or docker-compose on linux.
 

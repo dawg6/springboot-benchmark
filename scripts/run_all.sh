@@ -1,9 +1,11 @@
 #!/bin/sh
 
+images="openjdk graalvm native native-ee native-ee-pgo"
+
 mkdir -p ./results
 rm -rf ./results/*.txt
 
-for f in openjdk graalvm native
+for f in $images
 do
     echo "Waiting for $f to start..."
     host="http://$f:8080"
@@ -15,7 +17,8 @@ done
 sleep 5
 echo "Starting tests..."
 
-for f in openjdk graalvm native; do
+for f in $images
+do
     echo "benchmarking $f..."
     echo "Results for $f" > ./results/$f.txt
     host="http://$f:8080"

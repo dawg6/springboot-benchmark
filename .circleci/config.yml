@@ -33,5 +33,11 @@ jobs:
             docker push $DOCKER_LOGIN/benchmark:openjdk-latest
             docker push $DOCKER_LOGIN/benchmark:graalvm-latest
             docker push $DOCKER_LOGIN/benchmark:native-latest
+            docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
+            docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-gpo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-gpo-latest -f Dockerfile-native-ee-pgo
+            docker push $DOCKER_LOGIN/graalvm-ee:native-ee-$TAG
+            docker push $DOCKER_LOGIN/graalvm-ee:native-ee-pgo-$TAG
+            docker push $DOCKER_LOGIN/graalvm-ee:native-ee-latest
+            docker push $DOCKER_LOGIN/graalvm-ee:native-ee-pgo-latest
 
 
