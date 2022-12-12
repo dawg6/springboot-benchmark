@@ -1,0 +1,37 @@
+Docker images:
+
+Results for graalvm
+[{"name":"toJson","elapsedMs":1085,"iterations":100000,"iterationsPerMs":92.16589861751152},{"name":"fromJson","elapsedMs":1319,"iterations":100000,"iterationsPerMs":75.8150113722517},{"name":"compute","elapsedMs":658,"iterations":100000,"iterationsPerMs":151.9756838905775},{"name":"total","elapsedMs":3062,"iterations":300000,"iterationsPerMs":97.97517962116264}]
+Results for native-ee-pgo
+[{"name":"toJson","elapsedMs":1085,"iterations":100000,"iterationsPerMs":92.16589861751152},{"name":"fromJson","elapsedMs":1536,"iterations":100000,"iterationsPerMs":65.10416666666667},{"name":"compute","elapsedMs":642,"iterations":100000,"iterationsPerMs":155.76323987538942},{"name":"total","elapsedMs":3263,"iterations":300000,"iterationsPerMs":91.93993257738278}]
+Results for native-ee
+[{"name":"toJson","elapsedMs":1496,"iterations":100000,"iterationsPerMs":66.84491978609626},{"name":"fromJson","elapsedMs":1875,"iterations":100000,"iterationsPerMs":53.333333333333336},{"name":"compute","elapsedMs":641,"iterations":100000,"iterationsPerMs":156.00624024961},{"name":"total","elapsedMs":4012,"iterations":300000,"iterationsPerMs":74.77567298105683}]
+Results for native
+[{"name":"toJson","elapsedMs":1880,"iterations":100000,"iterationsPerMs":53.191489361702125},{"name":"fromJson","elapsedMs":2231,"iterations":100000,"iterationsPerMs":44.82294935006723},{"name":"compute","elapsedMs":642,"iterations":100000,"iterationsPerMs":155.76323987538942},{"name":"total","elapsedMs":4753,"iterations":300000,"iterationsPerMs":63.11803071744161}]
+Results for openjdk
+[{"name":"toJson","elapsedMs":900,"iterations":100000,"iterationsPerMs":111.11111111111111},{"name":"fromJson","elapsedMs":1523,"iterations":100000,"iterationsPerMs":65.65988181221273},{"name":"compute","elapsedMs":675,"iterations":100000,"iterationsPerMs":148.14814814814815},{"name":"total","elapsedMs":3098,"iterations":300000,"iterationsPerMs":96.83666881859264}]
+
+Memory usage:
+
+docker stats --no-stream
+
+CONTAINER ID   NAME                                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+d9c8c566c058   springboot-benchmark-native-ee-pgo-1   0.01%     14.2MiB / 7.787GiB    0.18%     750B / 0B         0B / 0B           18
+a2300d75cbe0   springboot-benchmark-openjdk-1         0.12%     147.7MiB / 7.787GiB   1.85%     660B / 0B         0B / 0B           36
+7de77ae79117   springboot-benchmark-native-ee-1       0.01%     16.25MiB / 7.787GiB   0.20%     750B / 0B         0B / 0B           18
+e31383e8f92d   springboot-benchmark-native-1          0.02%     22.45MiB / 7.787GiB   0.28%     750B / 0B         0B / 0B           18
+ddc7560f4d66   springboot-benchmark-graalvm-1         0.12%     107.7MiB / 7.787GiB   1.35%     750B / 0B         0B / 0B           37
+
+Locally:
+
+[{"name":"toJson","elapsedMs":2763,"iterations":100000,"iterationsPerMs":36.19254433586681},{"name":"fromJson","elapsedMs":3043,"iterations":100000,"iterationsPerMs":32.86230693394676},{"name":"compute","elapsedMs":663,"iterations":100000,"iterationsPerMs":150.82956259426848},{"name":"total","elapsedMs":6469,"iterations":300000,"iterationsPerMs":46.375019322924715}]
+
+Memory usage:
+
+jps to get PID
+jcmd PID GC.heap_info
+
+ garbage-first heap   total 45056K, used 14760K [0x0000000083600000, 0x0000000100000000)
+  region size 1024K, 2 young (2048K), 1 survivors (1024K)
+ Metaspace       used 24913K, committed 25344K, reserved 1073152K
+  class space    used 3454K, committed 3648K, reserved 1048576K

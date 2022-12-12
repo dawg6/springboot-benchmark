@@ -1,0 +1,37 @@
+FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS build
+
+WORKDIR /build
+
+COPY ./mvnw .
+COPY ./pom.xml .
+COPY .mvn/ .mvn/
+
+RUN sed -i 's/\r$//' mvnw
+RUN sh ./mvnw verify --fail-never
+
+RUN microdnf install -y wget
+
+COPY ./src src/
+COPY scripts/wait-for.sh .
+RUN sed -i 's/\r$//' wait-for.sh
+
+RUN sh ./mvnw package
+
+RUN sh ./mvnw -Pnative -DbuildArgs=--pgo-instrument native:compile
+
+COPY scripts/run_profiler.sh .
+RUN sed -i 's/\r$//' run_profiler.sh
+
+RUN ./run_profiler.sh
+
+RUN sh ./mvnw -Pnative -DbuildArgs=--pgo=default.iprof native:compile
+
+FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS final
+
+WORKDIR /root
+
+COPY --from=build /build/target/springboot-benchmark .
+
+EXPOSE 8080
+
+ENTRYPOINT ["/root/springboot-benchmark"]

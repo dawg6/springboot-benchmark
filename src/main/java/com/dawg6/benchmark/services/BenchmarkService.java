@@ -53,7 +53,7 @@ public class BenchmarkService {
         var count = 100_000;
         var mapper = new ObjectMapper();
         var text = mapper.writeValueAsString(bean);
-            
+
         var start = System.currentTimeMillis();
         for (var i = 0; i < count; i++) {
             mapper.readValue(text, BenchmarkBean.class);
@@ -79,6 +79,21 @@ public class BenchmarkService {
         return ResponseEntity.ok(new BenchmarkResult("compute", elapsed, count));
     }
 
+    @GetMapping("/shutdown")
+    public ResponseEntity<String> shutdown() {
+        log.info("Shutting down");
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                Thread.yield();
+                System.exit(0);
+            }
+        }).start();
+
+        return ResponseEntity.ok("ok");
+    }
+
     @GetMapping("/benchmark")
     public ResponseEntity<List<BenchmarkResult>> benchmarkAll() throws Exception {
         var list = new ArrayList<BenchmarkResult>(10);
@@ -96,5 +111,5 @@ public class BenchmarkService {
     public void handleException(Exception e) {
         log.error("Exception", e);
     }
-    
+
 }
