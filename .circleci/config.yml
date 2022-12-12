@@ -25,4 +25,13 @@ jobs:
             docker build . -t $DOCKER_LOGIN/benchmark:openjdk-$TAG -t $DOCKER_LOGIN/benchmark:openjdk-latest -f Dockerfile-openjdk
             docker build . -t $DOCKER_LOGIN/benchmark:graalvm-$TAG -t $DOCKER_LOGIN/benchmark:graalvm-latest -f Dockerfile-graalvm
             docker build . -t $DOCKER_LOGIN/benchmark:native-$TAG -t $DOCKER_LOGIN/benchmark:native-latest -f Dockerfile-native
-            docker push -a
+            docker push $DOCKER_LOGIN/benchmark:runner-$TAG
+            docker push $DOCKER_LOGIN/benchmark:openjdk-$TAG
+            docker push $DOCKER_LOGIN/benchmark:graalvm-$TAG
+            docker push $DOCKER_LOGIN/benchmark:native-$TAG
+            docker push $DOCKER_LOGIN/benchmark:runner-latest
+            docker push $DOCKER_LOGIN/benchmark:openjdk-latest
+            docker push $DOCKER_LOGIN/benchmark:graalvm-latest
+            docker push $DOCKER_LOGIN/benchmark:native-latest
+
+
