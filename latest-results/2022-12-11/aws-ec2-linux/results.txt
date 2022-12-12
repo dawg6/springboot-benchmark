@@ -19,14 +19,14 @@ CONTAINER ID   NAME                             CPU %     MEM USAGE / LIMIT     
 
 Locally:
 
-[{"name":"toJson","elapsedMs":2772,"iterations":100000,"iterationsPerMs":36.075036075036074},{"name":"fromJson","elapsedMs":3047,"iterations":100000,"iterationsPerMs":32.81916639317361},{"name":"compute","elapsedMs":661,"iterations":100000,"iterationsPerMs":151.285930408472},{"name":"total","elapsedMs":6480,"iterations":300000,"iterationsPerMs":46.2962962962963}]
+[{"name":"toJson","elapsedMs":2763,"iterations":100000,"iterationsPerMs":36.19254433586681},{"name":"fromJson","elapsedMs":3043,"iterations":100000,"iterationsPerMs":32.86230693394676},{"name":"compute","elapsedMs":663,"iterations":100000,"iterationsPerMs":150.82956259426848},{"name":"total","elapsedMs":6469,"iterations":300000,"iterationsPerMs":46.375019322924715}]
 
 Memory usage:
 
 jps to get PID
 jcmd PID GC.heap_info
 
- garbage-first heap   total 153600K, used 59615K [0x0000000083600000, 0x0000000100000000)
-  region size 1024K, 46 young (47104K), 1 survivors (1024K)
- Metaspace       used 27053K, committed 27520K, reserved 1073152K
-  class space    used 3728K, committed 3968K, reserved 1048576K
+ garbage-first heap   total 45056K, used 14760K [0x0000000083600000, 0x0000000100000000)
+  region size 1024K, 2 young (2048K), 1 survivors (1024K)
+ Metaspace       used 24913K, committed 25344K, reserved 1073152K
+  class space    used 3454K, committed 3648K, reserved 1048576K
