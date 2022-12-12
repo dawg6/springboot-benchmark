@@ -6,7 +6,7 @@ workflows:
     jobs:
       - build:
           context:
-            - dawg6-main
+            - main
 
 jobs:
   build:
@@ -21,8 +21,8 @@ jobs:
           name: Build and push Docker images
           command: |
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker build . -t dawg6/benchmark:runner-$TAG dawg6/benchmark:runner-latest -f Dockerfile
-            docker build . -t dawg6/benchmark:openjdk-$TAG dawg6/benchmark:openjdk-latest -f Dockerfile
-            docker build . -t dawg6/benchmark:graalvm-$TAG dawg6/benchmark:graalvm-latest -f Dockerfile
-            docker build . -t dawg6/benchmark:native-$TAG dawg6/benchmark:native-latest -f Dockerfile
+            docker build . -t $DOCKER_LOGIN/benchmark:runner-$TAG -t $DOCKER_LOGIN/benchmark:runner-latest -f Dockerfile
+            docker build . -t $DOCKER_LOGIN/benchmark:openjdk-$TAG -t $DOCKER_LOGIN/benchmark:openjdk-latest -f Dockerfile-openjdk
+            docker build . -t $DOCKER_LOGIN/benchmark:graalvm-$TAG -t $DOCKER_LOGIN/benchmark:graalvm-latest -f Dockerfile-graalvm
+            docker build . -t $DOCKER_LOGIN/benchmark:native-$TAG -t $DOCKER_LOGIN/benchmark:native-latest -f Dockerfile-native
             docker push -a
