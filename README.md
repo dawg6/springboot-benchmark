@@ -17,7 +17,7 @@ Each environment has been built into an image and published on https://hub.docke
 - GraalVM CE Native: dawg6/benchmark:native-(version)
 - Note: Oracle GraalVM EE license prevents me from publishing the GraalVM EE images to hub.docker.com.
 
-Also, there is a separate image to run the benchmark tests against all of the environments, using docker compose"
+Also, there is a separate image to run the benchmark tests against all of the environments, using docker compose
 
 - dawg6/benchmark:runner-(version)
 
@@ -25,7 +25,9 @@ Also, there is a separate image to run the benchmark tests against all of the en
 
 - toJson (convert POJO object to Json)
 - fromJson (convert Json to POJO)
-- compute (perform CPU intensive operations - each iteration is 100 x tan/atan computations)
+- compute (perform CPU intensive operations - each iteration is 100 x several math computations)
+- collection (create a Hashtable, populate it, iterate through it and remove each item)
+- memCopy (create a 1MB byte array and copy it to another byte array)
 
 Each benchmark is run 100,000 iterations
 
@@ -62,6 +64,8 @@ The following endpoints are supported:
 - /benchmarkToJson - To Json Benchmark
 - /benchmarkFromJson - From Json Benchmark
 - /benchmarkCompute - Compute Benchmark
+- /benchmarkMemCopy - Mem Copy Benchmark
+- /benchmarkCollection - Collection Benchmark
 - /shutdown - Shutsdown the app. This is mainly used for profiling for the native-ee-pgo image
 
 ### Building using docker compose (or docker-compose)

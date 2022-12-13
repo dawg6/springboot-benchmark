@@ -1,6 +1,7 @@
 package com.dawg6.benchmark.services;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class BenchmarkService {
     private static final Logger log = LoggerFactory.getLogger(BenchmarkService.class);
 
+    private static final long count = 100_000l;
+
     @Autowired
     BenchmarkBean bean;
 
@@ -35,7 +38,6 @@ public class BenchmarkService {
 
     @GetMapping("/benchmarkToJson")
     public ResponseEntity<BenchmarkResult> benchmarkToJson() throws Exception {
-        var count = 100_000;
         var mapper = new ObjectMapper();
 
         var start = System.currentTimeMillis();
@@ -50,7 +52,6 @@ public class BenchmarkService {
 
     @GetMapping("/benchmarkFromJson")
     public ResponseEntity<BenchmarkResult> benchmarkFromJson() throws Exception {
-        var count = 100_000;
         var mapper = new ObjectMapper();
         var text = mapper.writeValueAsString(bean);
 
@@ -66,17 +67,54 @@ public class BenchmarkService {
 
     @GetMapping("/benchmarkCompute")
     public ResponseEntity<BenchmarkResult> benchmarkCompute() throws Exception {
-        var count = 100_000;
         var r = new Random(420);
-        var value = r.nextDouble(Math.PI);
 
         var start = System.currentTimeMillis();
         for (var i = 0; i < count * 100; i++) {
-            value = Math.atan(Math.tan(value));
+            var value = r.nextDouble(Math.PI);
+            var value2 = r.nextLong();
+            var value3 = r.nextInt();
+            value = Math.atan(Math.tan(value)) * Math.sqrt(value) * Math.pow(value, value3) * (value3 * value3) - value2;
         }
         var elapsed = System.currentTimeMillis() - start;
 
         return ResponseEntity.ok(new BenchmarkResult("compute", elapsed, count));
+    }
+
+    @GetMapping("/benchmarkCollection")
+    public ResponseEntity<BenchmarkResult> benchmarkCollection() throws Exception {
+        var map = new Hashtable<Long, Double>();
+        var r = new Random();
+
+        var start = System.currentTimeMillis();
+        for (var i = 0; i < count * 100; i++) {
+            map.put(r.nextLong(), r.nextDouble());
+        }
+        for (var i = map.entrySet().iterator(); i.hasNext(); ) {
+            i.next();
+            i.remove();
+        }
+
+        var elapsed = System.currentTimeMillis() - start;
+
+        return ResponseEntity.ok(new BenchmarkResult("collection", elapsed, count));
+    }
+
+    @GetMapping("/benchmarkMemCopy")
+    public ResponseEntity<BenchmarkResult> benchmarkMemCopy() throws Exception {
+        var count = 100_000;
+        var array1 = new byte[1*1024*1024];
+        var array2 = new byte[array1.length];
+        var r = new Random(420);
+        r.nextBytes(array1);
+
+        var start = System.currentTimeMillis();
+        for (var i = 0; i < count; i++) {
+            System.arraycopy(array1, 0, array2, 0, array1.length);
+        }
+        var elapsed = System.currentTimeMillis() - start;
+
+        return ResponseEntity.ok(new BenchmarkResult("memCopy", elapsed, count));
     }
 
     @GetMapping("/shutdown")
@@ -100,9 +138,11 @@ public class BenchmarkService {
         list.add(benchmarkToJson().getBody());
         list.add(benchmarkFromJson().getBody());
         list.add(benchmarkCompute().getBody());
+        list.add(benchmarkMemCopy().getBody());
+        list.add(benchmarkCollection().getBody());
 
         var total = list.stream().reduce(new BenchmarkResult("total"), (i, e) -> i.combine(e));
-        list.add(total);
+        list.add(0, total);
 
         return ResponseEntity.ok(list);
     }

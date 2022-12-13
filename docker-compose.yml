@@ -23,7 +23,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-native-ee
-        image: ${DOCKER_USER}/benchmark:native-ee-${IMAGE_TAG}
+        image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-${IMAGE_TAG}
         ports:
             - ${NATIVE_EE_PORT}:8080
         env_file:
@@ -32,7 +32,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-native-ee-pgo
-        image: ${DOCKER_USER}/benchmark:native-ee-pgo-${IMAGE_TAG}
+        image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-pgo-${IMAGE_TAG}
         ports:
             - ${NATIVE_EE_PGO_PORT}:8080
         env_file:
