@@ -1,15 +1,47 @@
 Docker images:
 
+./build_all.sh
+./run_all.sh
+cat results/*
+
+Results for graalvm
+[{"name":"total","elapsedMs":23955,"iterations":500000,"iterationsPerMs":20.872469213107912},{"name":"toJson","elapsedMs":1374,"iterations":100000,"iterationsPerMs":72.7802037845706},{"name":"fromJson","elapsedMs":1615,"iterations":100000,"iterationsPerMs":61.919504643962846},{"name":"compute","elapsedMs":1189,"iterations":100000,"iterationsPerMs":84.10428931875526},{"name":"memCopy","elapsedMs":12641,"iterations":100000,"iterationsPerMs":7.910766553279013},{"name":"collection","elapsedMs":7136,"iterations":100000,"iterationsPerMs":14.013452914798206}]
+Results for native-ee-pgo
+[{"name":"total","elapsedMs":44859,"iterations":500000,"iterationsPerMs":11.146035355224146},{"name":"toJson","elapsedMs":1799,"iterations":100000,"iterationsPerMs":55.58643690939411},{"name":"fromJson","elapsedMs":2030,"iterations":100000,"iterationsPerMs":49.26108374384236},{"name":"compute","elapsedMs":1107,"iterations":100000,"iterationsPerMs":90.3342366757001},{"name":"memCopy","elapsedMs":26404,"iterations":100000,"iterationsPerMs":3.7873049537948797},{"name":"collection","elapsedMs":13519,"iterations":100000,"iterationsPerMs":7.396996819291368}]
+Results for native-ee
+[{"name":"total","elapsedMs":47725,"iterations":500000,"iterationsPerMs":10.476689366160294},{"name":"toJson","elapsedMs":2276,"iterations":100000,"iterationsPerMs":43.936731107205624},{"name":"fromJson","elapsedMs":2297,"iterations":100000,"iterationsPerMs":43.535045711798},{"name":"compute","elapsedMs":1166,"iterations":100000,"iterationsPerMs":85.76329331046313},{"name":"memCopy","elapsedMs":24171,"iterations":100000,"iterationsPerMs":4.137189193661826},{"name":"collection","elapsedMs":17815,"iterations":100000,"iterationsPerMs":5.613247263541959}]
+Results for native
+[{"name":"total","elapsedMs":45077,"iterations":500000,"iterationsPerMs":11.092131242096857},{"name":"toJson","elapsedMs":2059,"iterations":100000,"iterationsPerMs":48.56726566294318},{"name":"fromJson","elapsedMs":2492,"iterations":100000,"iterationsPerMs":40.12841091492777},{"name":"compute","elapsedMs":1190,"iterations":100000,"iterationsPerMs":84.03361344537815},{"name":"memCopy","elapsedMs":14677,"iterations":100000,"iterationsPerMs":6.8133814812291345},{"name":"collection","elapsedMs":24659,"iterations":100000,"iterationsPerMs":4.055314489638672}]
+Results for openjdk
+[{"name":"total","elapsedMs":23236,"iterations":500000,"iterationsPerMs":21.518333620244448},{"name":"toJson","elapsedMs":1104,"iterations":100000,"iterationsPerMs":90.57971014492753},{"name":"fromJson","elapsedMs":1489,"iterations":100000,"iterationsPerMs":67.15916722632639},{"name":"compute","elapsedMs":1732,"iterations":100000,"iterationsPerMs":57.736720554272516},{"name":"memCopy","elapsedMs":12155,"iterations":100000,"iterationsPerMs":8.227067050596462},{"name":"collection","elapsedMs":6756,"iterations":100000,"iterationsPerMs":14.801657785671996}]
 
 Memory usage:
 
+docker-compose up native native-ee native-ee-pgo openjdk graalvm
 docker stats --no-stream
 
+CONTAINER ID   NAME                                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O     BLOCK I/O     PIDS
+fdce0ef3e22c   springboot-benchmark_native_1          0.03%     22.28MiB / 15.51GiB   0.14%     806B / 0B   0B / 0B       18
+65b6fd3d315c   springboot-benchmark_openjdk_1         0.31%     143MiB / 15.51GiB     0.90%     876B / 0B   0B / 73.7kB   42
+a9e6b3fd8e20   springboot-benchmark_native-ee_1       0.03%     15.97MiB / 15.51GiB   0.10%     876B / 0B   0B / 0B       18
+879e48b5de3b   springboot-benchmark_native-ee-pgo_1   0.03%     13.97MiB / 15.51GiB   0.09%     806B / 0B   0B / 0B       18
+241f3259f61f   springboot-benchmark_graalvm_1         0.31%     121.9MiB / 15.51GiB   0.77%     806B / 0B   0B / 73.7kB   42
 
 Locally:
+
+./mvnw spring-boot:run
+curl http://localhost:8080/benchmark
+
+[{"name":"total","elapsedMs":27684,"iterations":500000,"iterationsPerMs":18.060973847709867},{"name":"toJson","elapsedMs":3172,"iterations":100000,"iterationsPerMs":31.525851197982345},{"name":"fromJson","elapsedMs":3506,"iterations":100000,"iterationsPerMs":28.52253280091272},{"name":"compute","elapsedMs":2038,"iterations":100000,"iterationsPerMs":49.06771344455348},{"name":"memCopy","elapsedMs":11379,"iterations":100000,"iterationsPerMs":8.788118463836893},{"name":"collection","elapsedMs":7589,"iterations":100000,"iterationsPerMs":13.176966662274344}]
 
 Memory usage:
 
 jps to get PID
 jcmd PID GC.heap_info
+
+ garbage-first heap   total 61440K, used 40561K [0x0000000707c00000, 0x0000000800000000)
+  region size 2048K, 18 young (36864K), 4 survivors (8192K)
+ Metaspace       used 24237K, committed 24640K, reserved 1073152K
+  class space    used 3367K, committed 3520K, reserved 1048576K
+
 
