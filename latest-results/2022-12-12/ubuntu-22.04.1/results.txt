@@ -1,0 +1,15 @@
+Docker images:
+
+
+Memory usage:
+
+docker stats --no-stream
+
+
+Locally:
+
+Memory usage:
+
+jps to get PID
+jcmd PID GC.heap_info
+

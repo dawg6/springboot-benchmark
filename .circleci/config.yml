@@ -11,6 +11,7 @@ workflows:
 jobs:
   build:
     machine: true
+    resource_class: dawg6/scott-pc
     steps:
       - checkout
       - run:
@@ -18,7 +19,7 @@ jobs:
           command: |
             echo 'export TAG=0.2.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
       - run:
-          name: Build and push Docker images
+          name: Build and push Docker images to public repo
           command: |
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
             docker build . -t $DOCKER_LOGIN/benchmark:runner-$TAG -t $DOCKER_LOGIN/benchmark:runner-latest -f Dockerfile
@@ -40,7 +41,7 @@ jobs:
             docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
             docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest -f Dockerfile-native-ee-pgo
       - run:
-          name: Push GraalVM EE Docker images
+          name: Push GraalVM EE Docker images (to private repo)
           command: |
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
             docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG

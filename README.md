@@ -25,7 +25,9 @@ Also, there is a separate image to run the benchmark tests against all of the en
 
 - toJson (convert POJO object to Json)
 - fromJson (convert Json to POJO)
-- compute (perform CPU intensive operations - each iteration is 100 x tan/atan computations)
+- compute (perform CPU intensive operations - each iteration is 100 x several math computations)
+- collection (create a Hashtable, populate it, iterate through it and remove items)
+- memCopy (create a 1MB byte array and copy it to another byte array)
 
 Each benchmark is run 100,000 iterations
 
@@ -62,6 +64,8 @@ The following endpoints are supported:
 - /benchmarkToJson - To Json Benchmark
 - /benchmarkFromJson - From Json Benchmark
 - /benchmarkCompute - Compute Benchmark
+- /benchmarkMemCopy - Compute Benchmark
+- /benchmarkCollection - Compute Benchmark
 - /shutdown - Shutsdown the app. This is mainly used for profiling for the native-ee-pgo image
 
 ### Building using docker compose (or docker-compose)
