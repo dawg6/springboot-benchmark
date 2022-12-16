@@ -7,10 +7,6 @@ workflows:
       - build:
           context:
             - main
-          filters:
-            branches:
-              only:
-                - main
 
 jobs:
   build:
