@@ -14,7 +14,7 @@ COPY ./src src/
 RUN sh ./mvnw package
 RUN sh ./mvnw -Pnative native:compile
 
-FROM ghcr.io/graalvm/native-image:ol9-java17 AS final
+FROM oraclelinux:9-slim AS final
 
 WORKDIR /root
 

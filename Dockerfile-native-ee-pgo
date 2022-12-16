@@ -26,7 +26,7 @@ RUN ./run_profiler.sh
 
 RUN sh ./mvnw -Pnative -DbuildArgs=--pgo=default.iprof native:compile
 
-FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS final
+FROM oraclelinux:8-slim AS final
 
 WORKDIR /root
 
