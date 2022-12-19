@@ -26,10 +26,10 @@ jobs:
           name: Build and push Docker images to public repo
           command: |
             echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker build . -t $DOCKER_LOGIN/benchmark:runner-$TAG -t $DOCKER_LOGIN/benchmark:runner-latest -f Dockerfile
-            docker build . -t $DOCKER_LOGIN/benchmark:openjdk-$TAG -t $DOCKER_LOGIN/benchmark:openjdk-latest -f Dockerfile-openjdk
-            docker build . -t $DOCKER_LOGIN/benchmark:graalvm-$TAG -t $DOCKER_LOGIN/benchmark:graalvm-latest -f Dockerfile-graalvm
-            docker build . -t $DOCKER_LOGIN/benchmark:native-$TAG -t $DOCKER_LOGIN/benchmark:native-latest -f Dockerfile-native
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/benchmark:runner-$TAG -t $DOCKER_LOGIN/benchmark:runner-latest -f Dockerfile
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/benchmark:openjdk-$TAG -t $DOCKER_LOGIN/benchmark:openjdk-latest -f Dockerfile-openjdk
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/benchmark:graalvm-$TAG -t $DOCKER_LOGIN/benchmark:graalvm-latest -f Dockerfile-graalvm
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/benchmark:native-$TAG -t $DOCKER_LOGIN/benchmark:native-latest -f Dockerfile-native
             docker push $DOCKER_LOGIN/benchmark:runner-$TAG
             docker push $DOCKER_LOGIN/benchmark:openjdk-$TAG
             docker push $DOCKER_LOGIN/benchmark:graalvm-$TAG
@@ -42,8 +42,8 @@ jobs:
           name: Build Docker images using Oracle GraalVM EE base images
           command: |
             echo $ORACLE_PWD | docker login -u $ORACLE_USER --password-stdin container-registry.oracle.com
-            docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
-            docker build . -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest -f Dockerfile-native-ee-pgo
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
+            docker build . --build-arg REPO_PROXY_HOST=localhost:8081 --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest -f Dockerfile-native-ee-pgo
       - run:
           name: Push GraalVM EE Docker images (to private repo)
           command: |
