@@ -10,14 +10,14 @@ RUN mkdir $HOME/.m2
 RUN sed -i "s/REPO_PROXY_HOST/$REPO_PROXY_HOST/" settings.xml
 RUN mv settings.xml $HOME/.m2/
 
+RUN microdnf install -y wget
+
 COPY ./mvnw .
 COPY ./pom.xml .
 COPY .mvn/ .mvn/
 
 RUN sed -i 's/\r$//' mvnw
 RUN sh ./mvnw dependency:resolve --fail-never
-
-RUN microdnf install -y wget
 
 COPY ./src src/
 COPY scripts/wait-for.sh .
@@ -34,7 +34,7 @@ RUN ./run_profiler.sh
 
 RUN sh ./mvnw -Pnative -DbuildArgs=--pgo=default.iprof native:compile
 
-FROM container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 AS final
+FROM oraclelinux:8-slim AS final
 
 WORKDIR /root
 
