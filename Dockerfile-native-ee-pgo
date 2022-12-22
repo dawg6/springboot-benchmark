@@ -7,7 +7,7 @@ ENV REPO_PROXY_HOST=$REPO_PROXY_HOST
 
 COPY ./scripts/settings.xml .
 RUN mkdir $HOME/.m2
-RUN sed -i "s/REPO_PROXY_HOST/$REPO_PROXY_HOST/" settings.xml
+RUN sed -i "s|REPO_PROXY_HOST|$REPO_PROXY_HOST|g" settings.xml
 RUN mv settings.xml $HOME/.m2/
 
 RUN microdnf install -y wget

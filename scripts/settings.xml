@@ -16,7 +16,7 @@
     <mirror>
       <id>central</id>
       <name>central</name>
-      <url>http://REPO_PROXY_HOST/repository/maven-group/</url>
+      <url>REPO_PROXY_HOST</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>
