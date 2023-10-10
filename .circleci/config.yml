@@ -14,7 +14,7 @@ workflows:
 jobs:
   build:
     machine: true
-    resource_class: dawg6/scott-pc
+    resource_class: dawg6/aws
     steps:
       - checkout
       - run:
