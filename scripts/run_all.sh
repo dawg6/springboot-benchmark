@@ -1,6 +1,7 @@
 #!/bin/sh
 
-images="openjdk graalvm native native-ee native-ee-pgo"
+images="openjdk graalvm native"
+#images="openjdk graalvm native native-ee native-ee-pgo"
 
 mkdir -p ./results
 rm -rf ./results/*.txt

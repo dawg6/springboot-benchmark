@@ -1,14 +1,8 @@
-FROM ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2 AS build
+FROM ghcr.io/graalvm/jdk-community:21 AS build
 
 WORKDIR /build
 
-ARG REPO_PROXY_HOST
-ENV REPO_PROXY_HOST=$REPO_PROXY_HOST
-
-COPY ./scripts/settings.xml .
-RUN mkdir $HOME/.m2
-RUN sed -i "s|REPO_PROXY_HOST|$REPO_PROXY_HOST|g" settings.xml
-RUN mv settings.xml $HOME/.m2/
+RUN microdnf install -y gzip
 
 COPY ./mvnw .
 COPY ./pom.xml .
@@ -21,7 +15,7 @@ COPY ./src src/
 
 RUN sh ./mvnw package
 
-FROM ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2 AS final
+FROM ghcr.io/graalvm/jdk-community:21 AS final
 
 WORKDIR /root
 

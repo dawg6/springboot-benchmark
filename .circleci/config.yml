@@ -14,7 +14,7 @@ workflows:
 jobs:
   build:
     machine: true
-    resource_class: dawg6/aws
+    resource_class: dawg6/minipc
     steps:
       - checkout
       - run:
@@ -37,19 +37,19 @@ jobs:
             docker push $DOCKER_LOGIN/benchmark:openjdk-latest
             docker push $DOCKER_LOGIN/benchmark:graalvm-latest
             docker push $DOCKER_LOGIN/benchmark:native-latest
-      - run:
-          name: Build Docker images using Oracle GraalVM EE base images
-          command: |
-            echo $ORACLE_PWD | docker login -u $ORACLE_USER --password-stdin container-registry.oracle.com
-            docker build . --build-arg REPO_PROXY_HOST=$REPO_PROXY_HOST --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
-            docker build . --build-arg REPO_PROXY_HOST=$REPO_PROXY_HOST --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest -f Dockerfile-native-ee-pgo
-      - run:
-          name: Push GraalVM EE Docker images (to private repo)
-          command: |
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG
-            docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG
-            docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest
-            docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest
+# - run:
+#     name: Build Docker images using Oracle GraalVM EE base images
+#     command: |
+#       echo $ORACLE_PWD | docker login -u $ORACLE_USER --password-stdin container-registry.oracle.com
+#       docker build . --build-arg REPO_PROXY_HOST=$REPO_PROXY_HOST --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest -f Dockerfile-native-ee
+#       docker build . --build-arg REPO_PROXY_HOST=$REPO_PROXY_HOST --network="host" -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG -t $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest -f Dockerfile-native-ee-pgo
+# - run:
+#     name: Push GraalVM EE Docker images (to private repo)
+#     command: |
+#       echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+#       docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-$TAG
+#       docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-$TAG
+#       docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-latest
+#       docker push $DOCKER_LOGIN/graalvm-ee:benchmark-native-ee-pgo-latest
 
 

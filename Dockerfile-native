@@ -1,14 +1,6 @@
-FROM ghcr.io/graalvm/native-image:ol9-java17 AS build
+FROM ghcr.io/graalvm/native-image-community:21-ol9 AS build
 
 WORKDIR /build
-
-ARG REPO_PROXY_HOST
-ENV REPO_PROXY_HOST=$REPO_PROXY_HOST
-
-COPY ./scripts/settings.xml .
-RUN mkdir $HOME/.m2
-RUN sed -i "s|REPO_PROXY_HOST|$REPO_PROXY_HOST|g" settings.xml
-RUN mv settings.xml $HOME/.m2/
 
 COPY ./mvnw .
 COPY ./pom.xml .
