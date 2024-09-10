@@ -17,24 +17,24 @@ services:
             - ${NATIVE_PORT}:8080
         env_file:
             - ./.env
-#    native-ee:
-#        build:
-#            context: .
-#            dockerfile: Dockerfile-native-ee
-#        image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-${IMAGE_TAG}
-#        ports:
-#            - ${NATIVE_EE_PORT}:8080
-#        env_file:
-#            - ./.env
-#    native-ee-pgo:
-#        build:
-#            context: .
-#            dockerfile: Dockerfile-native-ee-pgo
-#        image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-pgo-${IMAGE_TAG}
-#        ports:
-#            - ${NATIVE_EE_PGO_PORT}:8080
-#        env_file:
-#            - ./.env
+    native-ee:
+       build:
+           context: .
+           dockerfile: Dockerfile-native-ee
+       image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-${IMAGE_TAG}
+       ports:
+           - ${NATIVE_EE_PORT}:8080
+       env_file:
+           - ./.env
+    native-ee-pgo:
+       build:
+           context: .
+           dockerfile: Dockerfile-native-ee-pgo
+       image: ${DOCKER_USER}/graalvm-ee:benchmark-native-ee-pgo-${IMAGE_TAG}
+       ports:
+           - ${NATIVE_EE_PGO_PORT}:8080
+       env_file:
+           - ./.env
     graalvm:
         build:
             context: .

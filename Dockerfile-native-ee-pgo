@@ -1,4 +1,4 @@
-FROM container-registry.oracle.com/graalvm/native-image-ee:ol9-java17-22 AS build
+FROM container-registry.oracle.com/graalvm/native-image:21 AS build
 
 WORKDIR /build
 

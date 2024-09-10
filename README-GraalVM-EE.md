@@ -8,9 +8,6 @@ Note: The Oracle GraalVM EE license agreement precludes me from publushing the b
 4. Sign in or Register for an account
 5. First time, you must accept the license agreement
 6. First time you will also need to log in from the command line:
-
-    docker login container-registry.oracle.com
-
 7. CLick the breadcrumb link for GraalVM Repositories to go back to the image list.
 8. Click enterprise
 9. First time, you must accept the license agreement
