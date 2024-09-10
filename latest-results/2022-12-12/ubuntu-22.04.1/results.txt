@@ -1,6 +1,6 @@
 Docker images:
 
-./build_all.sh
+docker compose pull
 ./run_all.sh
 cat results/*
 
