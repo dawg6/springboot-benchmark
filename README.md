@@ -7,6 +7,9 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 - OpenJDK (using eclipse-temurin:17-jre-ubi9-minimal)
 - GraalVM CE (using ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2)
 - GraalVM CE Native (using ghcr.io/graalvm/native-image:ol9-java17)
+
+Note: the EE environments below have not yet been updated by Oracle to JDK 21 and the tests have been disabled
+
 - GraalVM EE Natve (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22)
 - GraalVM EE Natve PGO (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 and Profile Guided Optimizations)
 
