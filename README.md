@@ -5,7 +5,7 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 ## Environments
 
 - OpenJDK (using eclipse-temurin:21-jre-ubi9-minimal)
-- Bellsoft (using eclipse-temurin:21-jre-ubi9-minimal)
+- Bellsoft (using bellsoft/liberica-runtime-container:jdk-21-stream-musl)
 - GraalVM CE (using ghcr.io/graalvm/jdk-community:21)
 - GraalVM CE Native (using ghcr.io/graalvm/native-image-community:21-ol9)
 
