@@ -1,0 +1,27 @@
+FROM bellsoft/liberica-runtime-container:jdk-21-stream-musl AS build
+
+WORKDIR /build
+
+COPY ./mvnw .
+COPY ./pom.xml .
+COPY .mvn/ .mvn/
+
+RUN sed -i 's/\r$//' mvnw
+RUN sh ./mvnw dependency:resolve --fail-never
+
+COPY ./src src/
+
+RUN sh ./mvnw package
+
+FROM bellsoft/liberica-runtime-container:jre-21-stream-musl AS final
+
+WORKDIR /root
+
+COPY --from=build /build/target/springboot-benchmark-1.0.jar .
+
+ENV TZ=America/New_York
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","/root/springboot-benchmark-1.0.jar"]

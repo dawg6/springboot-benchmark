@@ -1,0 +1,39 @@
+Docker images:
+
+docker compose pull
+run_all.bat
+cat results\*
+
+Results for bellsoft
+[{"name":"total","elapsedMs":7625,"iterations":500000,"iterationsPerMs":65.57377049180327},{"name":"toJson","elapsedMs":359,"iterations":100000,"iterationsPerMs":278.55153203342616},{"name":"fromJson","elapsedMs":514,"iterations":100000,"iterationsPerMs":194.55252918287937},{"name":"compute","elapsedMs":537,"iterations":100000,"iterationsPerMs":186.21973929236498},{"name":"memCopy","elapsedMs":1990,"iterations":100000,"iterationsPerMs":50.25125628140704},{"name":"collection","elapsedMs":4225,"iterations":100000,"iterationsPerMs":23.668639053254438}]
+Results for graalvm
+[{"name":"total","elapsedMs":7720,"iterations":500000,"iterationsPerMs":64.76683937823834},{"name":"toJson","elapsedMs":396,"iterations":100000,"iterationsPerMs":252.5252525252525},{"name":"fromJson","elapsedMs":513,"iterations":100000,"iterationsPerMs":194.9317738791423},{"name":"compute","elapsedMs":559,"iterations":100000,"iterationsPerMs":178.89087656529517},{"name":"memCopy","elapsedMs":1925,"iterations":100000,"iterationsPerMs":51.94805194805195},{"name":"collection","elapsedMs":4327,"iterations":100000,"iterationsPerMs":23.110700254217704}]
+Results for native
+[{"name":"total","elapsedMs":18850,"iterations":500000,"iterationsPerMs":26.52519893899204},{"name":"toJson","elapsedMs":526,"iterations":100000,"iterationsPerMs":190.11406844106463},{"name":"fromJson","elapsedMs":621,"iterations":100000,"iterationsPerMs":161.0305958132045},{"name":"compute","elapsedMs":492,"iterations":100000,"iterationsPerMs":203.2520325203252},{"name":"memCopy","elapsedMs":6186,"iterations":100000,"iterationsPerMs":16.16553507921112},{"name":"collection","elapsedMs":11025,"iterations":100000,"iterationsPerMs":9.070294784580499}]
+Results for openjdk
+[{"name":"total","elapsedMs":7860,"iterations":500000,"iterationsPerMs":63.61323155216285},{"name":"toJson","elapsedMs":355,"iterations":100000,"iterationsPerMs":281.6901408450704},{"name":"fromJson","elapsedMs":512,"iterations":100000,"iterationsPerMs":195.3125},{"name":"compute","elapsedMs":535,"iterations":100000,"iterationsPerMs":186.9158878504673},{"name":"memCopy","elapsedMs":1966,"iterations":100000,"iterationsPerMs":50.8646998982706},{"name":"collection","elapsedMs":4492,"iterations":100000,"iterationsPerMs":22.26179875333927}]
+
+Memory usage:
+
+docker compose up native openjdk bellsoft graalvm # native-ee native-ee-pgo
+docker stats --no-stream
+
+CONTAINER ID   NAME                              CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O   PIDS
+326162f563bd   springboot-benchmark-openjdk-1    0.27%     198.7MiB / 31.22GiB   0.62%     1.2kB / 0B    0B / 0B     58       
+5059533e33fc   springboot-benchmark-graalvm-1    0.16%     164.4MiB / 31.22GiB   0.51%     1.05kB / 0B   0B / 0B     58       
+3313faabd20f   springboot-benchmark-native-1     0.01%     35.08MiB / 31.22GiB   0.11%     1.2kB / 0B    0B / 0B     18       
+a5359363c09e   springboot-benchmark-bellsoft-1   0.35%     157.5MiB / 31.22GiB   0.49%     1.2kB / 0B    0B / 0B     64
+
+Locally:
+
+mvnw spring-boot:run
+curl http://localhost:8080/benchmark
+
+[{"name":"total","elapsedMs":9798,"iterations":500000,"iterationsPerMs":51.03082261686058},{"name":"toJson","elapsedMs":909,"iterations":100000,"iterationsPerMs":110.01100110011001},{"name":"fromJson","elapsedMs":859,"iterations":100000,"iterationsPerMs":116.41443538998836},{"name":"compute","elapsedMs":1117,"iterations":100000,"iterationsPerMs":89.52551477170994},{"name":"memCopy","elapsedMs":1822,"iterations":100000,"iterationsPerMs":54.88474204171241},{"name":"collection","elapsedMs":5091,"iterations":100000,"iterationsPerMs":19.642506383814574}]
+
+Memory usage:
+
+jps to get PID
+jcmd PID GC.heap_info
+
+not currently available

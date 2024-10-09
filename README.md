@@ -4,18 +4,20 @@ This is a small project to do some quick benchmarks using Spring Boot in differe
 
 ## Environments
 
-- OpenJDK (using eclipse-temurin:17-jre-ubi9-minimal)
-- GraalVM CE (using ghcr.io/graalvm/jdk:ol9-java17-22.3.0-b2)
-- GraalVM CE Native (using ghcr.io/graalvm/native-image:ol9-java17)
+- OpenJDK (using eclipse-temurin:21-jre-ubi9-minimal)
+- Bellsoft (using eclipse-temurin:21-jre-ubi9-minimal)
+- GraalVM CE (using ghcr.io/graalvm/jdk-community:21)
+- GraalVM CE Native (using ghcr.io/graalvm/native-image-community:21-ol9)
 
 Note: the EE environments below have not yet been updated by Oracle to JDK 21 and the tests have been disabled
 
-- GraalVM EE Natve (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22)
-- GraalVM EE Natve PGO (using container-registry.oracle.com/graalvm/native-image-ee:ol8-java17-22 and Profile Guided Optimizations)
+- GraalVM EE Natve (using container-registry.oracle.com/graalvm/native-image:21)
+- GraalVM EE Natve PGO (using container-registry.oracle.com/graalvm/native-image:21 and Profile Guided Optimizations)
 
 Each environment has been built into an image and published on https://hub.docker.com/r/dawg6/benchmark
 
 - OpenJDK: dawg6/benchmark:openjdk-(version)
+- Bellsoft: dawg6/benchmark:bellsoft-(version)
 - GraalVM CE: dawg6/benchmark:graalvm-(version)
 - GraalVM CE Native: dawg6/benchmark:native-(version)
 - Note: Oracle GraalVM EE license prevents me from publishing the GraalVM EE images to hub.docker.com.
@@ -46,6 +48,7 @@ The below are Port #s to expose on host machine if you want to query the image(s
 - GRAALVM_PORT 
 - NATIVE_PORT 
 - OPENJDK_PORT
+- BELLSOFT_PORT
 
 ### Building and running locally
 
@@ -93,7 +96,7 @@ To run
 
 This will start up each image, run the benchmarks and then exit. Results will be written to the subdirectory ./results (one .txt file for each image)
 
-The scriptx [run_all.bat](run_all.bat) and [run_all.sh](run_all.sh) have been provided as a convenience.
+The scripts [run_all.bat](run_all.bat) and [run_all.sh](run_all.sh) have been provided as a convenience.
 
 ## Results Format
 
