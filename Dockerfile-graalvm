@@ -1,4 +1,4 @@
-FROM ghcr.io/graalvm/jdk-community:21 AS build
+FROM ghcr.io/graalvm/jdk-community:25 AS build
 
 WORKDIR /build
 
@@ -15,7 +15,7 @@ COPY ./src src/
 
 RUN sh ./mvnw package
 
-FROM ghcr.io/graalvm/jdk-community:21 AS final
+FROM ghcr.io/graalvm/jdk-community:25 AS final
 
 WORKDIR /root
 

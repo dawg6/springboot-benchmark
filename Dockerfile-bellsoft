@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-runtime-container:jdk-21-stream-musl AS build
+FROM bellsoft/liberica-runtime-container:jdk-25-stream-musl AS build
 
 WORKDIR /build
 
@@ -13,7 +13,7 @@ COPY ./src src/
 
 RUN sh ./mvnw package
 
-FROM bellsoft/liberica-runtime-container:jre-21-stream-musl AS final
+FROM bellsoft/liberica-runtime-container:jre-25-stream-musl AS final
 
 WORKDIR /root
 
